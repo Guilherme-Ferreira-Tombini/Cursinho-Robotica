@@ -6,6 +6,12 @@ const int echo = 0;
 
 void setup() {
   // put your setup code here, to run once:
+  pinMode(led_vermelho, OUTPUT);
+  pinMode(led_amarelo, OUTPUT);
+  pinMode(led_verde, OUTPUT);
+
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
 
 }
 
