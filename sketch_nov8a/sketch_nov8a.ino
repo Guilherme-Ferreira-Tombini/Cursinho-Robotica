@@ -9,7 +9,7 @@ const int copo = 9;
 float distancia = 0;
 long tempo = 0;
 int index = 0;
-int botao = 8;
+
 
 int leituras[numeros_lidos];
 
@@ -43,8 +43,6 @@ void setup() {
   pinMode(trig, OUTPUT);
   pinMode(echo, INPUT_PULLUP);
 
-  pinMode(botao, INPUT);
-
   Serial.begin(9600);
 }
 
@@ -75,33 +73,36 @@ void loop() {
     float distancia_atual = soma - 4;
     float copo_vazio;
 
-    if(distancia_atual >= 9 && distancia_atual <= 10){
+    //piscar para quando tiver vazio ou sem o copo
+    if(distancia_atual >= 8.05 && distancia_atual <= 10){
         pisca(led_vermelho,led_amarelo,led_verde);
     }
-    //copo cheio
-    if(distancia_atual >= 0 && distancia_atual <= 0.30){
-      digitalWrite(led_vermelho,HIGH);
-    }
 
-    //copo comecou a encher
-    if(distancia_atual != 9){
-      apaga_led();
-    }
-
-    //zero até metade -- terminar
-    if(distancia_atual >= 7 && distancia_atual <= 8.90){
+    //copo comecou a encher --> Acende apenas o verde
+    if(distancia_atual <= 8){
+      digitalWrite(led_amarelo, LOW);
+      digitalWrite(led_vermelho, LOW);
       digitalWrite(led_verde, HIGH);
     }
-    if(distancia_atual > 7.1 && distancia_atual <= 5){
+
+    //zero até metade --> Acende o verde e o amarelo
+    if(distancia_atual <= 3){
       digitalWrite(led_verde, HIGH);
       digitalWrite(led_amarelo, HIGH);
+      digitalWrite(led_vermelho, LOW);
+    }
 
+    //copo cheio - topo 1 --> Acende o verde, amarelo e vermelho
+    if(distancia_atual <= 1){
+      digitalWrite(led_verde, LOW);
+      digitalWrite(led_amarelo, LOW);
+      digitalWrite(led_vermelho,HIGH);
     }
   
 
     
     delay(100);
-    Serial.print("DISTANCIA ATUALA: ");
+    Serial.print("DISTANCIA ATUAL: ");
     Serial.println(distancia_atual);
   
 }
