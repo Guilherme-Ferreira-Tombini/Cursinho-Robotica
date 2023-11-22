@@ -98,9 +98,19 @@ void loop() {
       digitalWrite(led_amarelo, LOW);
       digitalWrite(led_vermelho,HIGH);
     }
-  
 
+    //
     
+    if(distancia_atual < 1){
+      digitalWrite(led_verde, LOW);
+      
+      digitalWrite(led_vermelho, LOW);
+      delay(100);
+      digitalWrite(led_vermelho, HIGH);
+      delay(100);
+
+    }
+  
     delay(100);
     Serial.print("DISTANCIA ATUAL: ");
     Serial.println(distancia_atual);
