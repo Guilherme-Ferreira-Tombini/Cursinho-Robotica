@@ -28,11 +28,6 @@ int pisca(int led_ver, int led_ama, int led_verd){
     digitalWrite(led_verd, HIGH);
 }
 
-void apaga_led(int verde = 4, int vermelho = 3, int amarelo = 2){
-  digitalWrite(verde, LOW);
-  digitalWrite(vermelho, LOW);
-  digitalWrite(amarelo, LOW);
-}
 
 void setup() {
   // put your setup code here, to run once:
@@ -53,7 +48,7 @@ void loop() {
     delayMicroseconds(10);
     digitalWrite(trig, LOW);
 
-    //ver sobre essa função
+    //calculando o tempo do pulso
     tempo = pulseIn(echo, HIGH);
     distancia = (tempo * 0.034) / 2;
 
@@ -92,15 +87,14 @@ void loop() {
       digitalWrite(led_vermelho, LOW);
     }
 
-    //copo cheio - topo 1 --> Acende o verde, amarelo e vermelho
+    //copo cheio -> acende led vermlho e apaga as demais
     if(distancia_atual <= 1){
       digitalWrite(led_verde, LOW);
       digitalWrite(led_amarelo, LOW);
       digitalWrite(led_vermelho,HIGH);
     }
 
-    //
-    
+    //copo no limite maximo -> pisca led vermelho
     if(distancia_atual < 1){
       digitalWrite(led_verde, LOW);
       
